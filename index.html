@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durva, My Love</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 700px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .yes {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .no {
+            background-color: #dc3545;
+            color: white;
+            position: absolute;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+            opacity: 0.7;
+            animation: floatUp 3s infinite ease-in-out;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-150px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container page active" id="page1">
+        <h1>Durva, My Love ❤️</h1>
+        <p>Since the moment we met, you've been the melody in my heart.</p>
+        <p>Let’s begin a journey through our love story.</p>
+        <button class="btn yes" onclick="nextPage(2)">Next ❤️</button>
+    </div>
+    <div class="container page" id="page2">
+        <h1>Our Love Story 💕</h1>
+        <p>Remember the first time we met? The way you smiled, the way my heart skipped a beat?</p>
+        <button class="btn yes" onclick="nextPage(3)">Next 💖</button>
+    </div>
+    <div class="container page" id="page3">
+        <h1>Love Questions 💌</h1>
+        <p>What was the first thing you noticed about me?</p>
+        <button class="btn yes" onclick="nextPage(4)">Next 💞</button>
+    </div>
+    <div class="container page" id="page4">
+        <h1>Will You Marry Me? 💍</h1>
+        <div class="buttons">
+            <button class="btn yes" onclick="yesClicked()">Yes! ❤️</button>
+            <button class="btn no" id="noBtn" onmouseover="moveNoButton()">No 😢</button>
+        </div>
+    </div>
+    <div class="container page" id="page5">
+        <h1>Yay! I Love You, Durva! ❤️💍</h1>
+        <img src="./images/25093edf-4da1-4b50-ab67-02ee29b8ee1d.jpg" alt="Love Image"
+            style="width: 20%; border-radius: 10px;">
+        <audio controls autoplay>
+            <source src="./images/Mahi Tenu Khabar Nahi Instrumental.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script>
+        function nextPage(pageNum) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page' + pageNum).classList.add('active');
+        }
+        function yesClicked() {
+            nextPage(5);
+        }
+        function moveNoButton() {
+            let noBtn = document.getElementById("noBtn");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            document.body.appendChild(heart);
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            setTimeout(() => heart.remove(), 3000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+</body>
+
+</html>
